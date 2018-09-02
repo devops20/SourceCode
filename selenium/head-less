@@ -1,0 +1,91 @@
+package automationFramework;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+public class welcome {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.gecko.driver", "/Users/ubuntu/geckodriver");
+		// Create a new instance of the Firefox driver
+		//WebDriver driver = new FirefoxDriver();
+		FirefoxBinary firefoxBinary = new FirefoxBinary();
+		firefoxBinary.addCommandLineOptions("--headless");
+		FirefoxOptions firefoxOptions = new FirefoxOptions();
+	    firefoxOptions.setBinary(firefoxBinary);
+	FirefoxDriver driver = new FirefoxDriver(firefoxOptions);
+        //Launch the Online Store Website
+		driver.get("http://www.store.demoqa.com");
+
+        // Print a Log In message to the screen
+        System.out.println("Successfully opened the website www.Store.Demoqa.com");
+
+		//Wait for 5 Sec
+		Thread.sleep(10000);
+		
+        // Close the driver
+        driver.quit();
+    }
+
+}
+
+
+
+python:
+
+ from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+
+options = Options()
+options.set_headless(headless=True)
+driver = webdriver.Firefox(firefox_options=options, executable_path=r'C:\Utility\BrowserDrivers\geckodriver.exe')
+driver.get("http://google.com/")
+print ("Headless Firefox Initialized")
+driver.quit()
+
+
+################
+
+package automationFramework;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+
+import java.util.concurrent.TimeUnit;
+
+public class HeadlessFirefoxSeleniumExample {
+  public static void main(String [] args) {
+    FirefoxBinary firefoxBinary = new FirefoxBinary();
+    firefoxBinary.addCommandLineOptions("--headless");
+    System.setProperty("webdriver.gecko.driver", "/Users/ubuntu/Downloads/geckodriver");
+    FirefoxOptions firefoxOptions = new FirefoxOptions();
+    firefoxOptions.setBinary(firefoxBinary);
+    FirefoxDriver driver = new FirefoxDriver(firefoxOptions);
+    try {
+      driver.get("http://www.google.com");
+      driver.manage().timeouts().implicitlyWait(4,
+          TimeUnit.SECONDS);
+      WebElement queryBox = driver.findElement(By.name("q"));
+      queryBox.sendKeys("headless firefox");
+      WebElement searchBtn = driver.findElement(By.name("btnK"));
+      searchBtn.click();
+      WebElement iresDiv = driver.findElement(By.id("ires"));
+      iresDiv.findElements(By.tagName("a")).get(0).click();
+      System.out.println("title of the page: "+driver.getTitle());
+
+      System.out.println(driver.getPageSource());
+    } finally {
+      driver.quit();
+    }
+  }
+}

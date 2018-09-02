@@ -1,0 +1,57 @@
+postgre sql:
+https://www.toadworld.com/platforms/postgres/b/weblog/archive/2017/03/29/postgresql-database-with-kubernetes-for-performance-and-collaboration
+
+
+[root@master postgresql]# cat postgres-rc.yaml 
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: postgres
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        -
+          image: postgres
+          name: postgres
+[root@master postgresql]# cat postgres-service.yaml 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+  name: “postgres”
+spec:
+  ports:
+    -
+      port: 5432
+  selector:
+    app: postgres
+
+
+
+##########################
+
+To create the Kubernetes service from the service definition file, run the following  kubectl create command.
+#kubectl create -f postgres-service.yaml
+Subsequently list the services.
+#kubectl get services
+Describe the service.
+kubectl describe svc postgres
+create the postgre rc:
+kubectl create -f  postgres-rc.yaml
+
+Subsequently list the replication controllers.
+kubectl get rc
+And describe the rc.
+kubectl describe rc postgres
+List the pods.
+kubectl get pods
+When we first listed the service description no service endpoints were listed. List the svc again.
+kubectl describe rc postgres

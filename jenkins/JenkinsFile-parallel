@@ -1,0 +1,19 @@
+echo "Will deploy to ${target_hosts}"
+
+def hosts = [:] 
+
+def strArray = target_hosts.tokenize(',')
+   for (String item : strArray) {
+       stage ("DEPLOY_${item}"){ 
+            hosts["DEPLOY_${item}"] = { 
+                      echo "Will deploy to ${item}" 
+            }
+      }
+   }
+parallel hosts
+
+
+
+
+//target_hosts
+ //  host1,host2,host3

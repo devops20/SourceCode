@@ -1,0 +1,25 @@
+
+################gitlab-setup ################
+export LC_ALL="en_US.UTF-8" && \
+export LC_CTYPE="en_US.UTF-8" && \
+sudo apt-get update && \
+sudo apt-get install -y curl openssh-server ca-certificates && \
+sudo apt-get install -y postfix && \
+curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash && \
+sudo EXTERNAL_URL="http://gitlab.example.com" apt-get install gitlab-ce && \
+sudo gitlab-ctl reconfigure
+
+
+################################
+issues:
+https://stackoverflow.com/questions/41956994/initdb-bin-invalid-locale-settings-check-lang-and-lc-environment-variables
+
+export LC_ALL="en_US.UTF-8" and 
+export LC_CTYPE="en_US.UTF-8"
+
+
+################git-clinet ################
+apt-get update && \
+apt-get install git -y
+
+###############################

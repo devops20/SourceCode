@@ -1,0 +1,10 @@
+---
+  - name: Installing Latest version of Apache
+    yum: pkg=httpd state=latest
+  - name: Copying the demo file
+    template: src=index.html dest=/var/www/html
+              owner=apache group=apache mode=0644
+  - name: (Enable it on System Boot)
+    service: name=httpd enabled=yes
+    notify:
+    - start apache

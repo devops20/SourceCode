@@ -1,0 +1,6 @@
+
+run this command to execute:
+
+  ansible-playbook -i httpd.ini httpd.yml 
+
+

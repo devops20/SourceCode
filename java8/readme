@@ -1,0 +1,3 @@
+
+
+ansible-playbook -i jdk.ini jdk.yml
